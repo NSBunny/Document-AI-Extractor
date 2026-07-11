@@ -1,0 +1,236 @@
+@import "tailwindcss";
+
+@theme {
+  /* Premium Dark Theme Core Palette */
+  --color-background: #070B17;
+  --color-surface: #101827;
+  --color-surface-hover: #162035;
+  --color-surface-elevated: #1a233d;
+  
+  --color-primary: #6D5EF9;
+  --color-primary-hover: #5748e0;
+  --color-primary-glow: rgba(109, 94, 249, 0.25);
+  
+  --color-secondary: #8B5CF6;
+  --color-secondary-hover: #7c3aed;
+  
+  --color-success: #22C55E;
+  --color-success-glow: rgba(34, 197, 94, 0.2);
+  
+  --color-warning: #F59E0B;
+  --color-warning-glow: rgba(245, 158, 11, 0.2);
+  
+  --color-danger: #EF4444;
+  --color-danger-glow: rgba(239, 68, 68, 0.2);
+  
+  --color-border: rgba(255, 255, 255, 0.06);
+  --color-border-hover: rgba(255, 255, 255, 0.12);
+  
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #9ca3af;
+  --color-text-tertiary: #6b7280;
+  --color-text-muted: #4b5563;
+
+  /* Premium Radii */
+  --radius-card: 24px;
+  --radius-button: 12px;
+  --radius-input: 8px;
+  --radius-badge: 9999px;
+
+  /* Transitions */
+  --animate-shimmer: shimmer 2s infinite;
+  --animate-pulse-glow: pulse-glow 2s infinite;
+  --animate-spin-slow: spin 8s linear infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+}
+
+/* Base resets & layouts */
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: radial-gradient(120% 120% at 50% 0%, #0c1228 0%, #070b17 60%, #02040a 100%);
+  color: var(--color-text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Light Theme Variables Overrides */
+html.light, :root:not(.dark) {
+  --color-background: #f8fafc;
+  --color-surface: #ffffff;
+  --color-surface-hover: #f1f5f9;
+  --color-surface-elevated: #e2e8f0;
+  
+  --color-border: rgba(15, 23, 42, 0.08);
+  --color-border-hover: rgba(15, 23, 42, 0.15);
+  
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #475569;
+  --color-text-tertiary: #64748b;
+  --color-text-muted: #94a3b8;
+}
+
+html.light body, :root:not(.dark) body {
+  background: radial-gradient(120% 120% at 50% 0%, #f8fafc 0%, #f1f5f9 60%, #e2e8f0 100%);
+  color: #0f172a;
+}
+
+/* Premium Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+html.light ::-webkit-scrollbar-thumb, :root:not(.dark) ::-webkit-scrollbar-thumb {
+  background: rgba(15, 23, 42, 0.08);
+}
+html.light ::-webkit-scrollbar-thumb:hover, :root:not(.dark) ::-webkit-scrollbar-thumb:hover {
+  background: rgba(15, 23, 42, 0.16);
+}
+
+/* High-End Glassmorphism Utilities */
+.glass-panel {
+  background: rgba(16, 24, 39, 0.55);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.03);
+}
+html.light .glass-panel, :root:not(.dark) .glass-panel {
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 10px 40px rgba(15, 23, 42, 0.04), inset 0 1px 1px rgba(255, 255, 255, 0.8);
+}
+
+.premium-card {
+  background: rgba(16, 24, 39, 0.45);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.02);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+html.light .premium-card, :root:not(.dark) .premium-card {
+  background: rgba(255, 255, 255, 0.65);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.03), inset 0 1px 1px rgba(255, 255, 255, 0.8);
+}
+
+.premium-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(109, 94, 249, 0.35);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), var(--color-primary-glow);
+}
+html.light .premium-card:hover, :root:not(.dark) .premium-card:hover {
+  border-color: rgba(109, 94, 249, 0.35);
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.06), rgba(109, 94, 249, 0.1);
+}
+
+/* Subtle background noise texture */
+.noise-bg:not(.fixed):not(.absolute):not(.sticky) {
+  position: relative;
+}
+.noise-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.015;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Recharts Glass Tooltip */
+.recharts-default-tooltip {
+  background-color: var(--color-surface) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: var(--radius-input) !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Focus styles */
+.focus-ring:focus-visible {
+  outline: none;
+  ring: 2px;
+  ring-color: var(--color-primary);
+  ring-offset: 2px;
+}
+
+/* Print Styles for Premium PDF Report Export */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+  
+  aside,
+  header,
+  .no-print,
+  button,
+  .btn,
+  .flex.gap-2 {
+    display: none !important;
+  }
+
+  main {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+  }
+
+  div[class*="lg:pl-"],
+  div[class*="pl-"] {
+    padding-left: 0 !important;
+  }
+
+  .glass-panel,
+  .premium-card {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    color: #000000 !important;
+    padding: 0 !important;
+    margin-bottom: 2rem !important;
+  }
+
+  /* Force light/print readability colors */
+  h1, h2, h3, h4, h5, h6, span, p, td, th {
+    color: #000000 !important;
+  }
+
+  .badge,
+  span[class*="bg-"] {
+    background: #f1f5f9 !important;
+    border: 1px solid #e2e8f0 !important;
+    color: #0f172a !important;
+  }
+
+  /* Table borders visible on print */
+  table {
+    border: 1px solid #e2e8f0 !important;
+  }
+  tr {
+    border-bottom: 1px solid #e2e8f0 !important;
+  }
+}
+
