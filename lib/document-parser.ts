@@ -100,7 +100,7 @@ export async function parseDocument(
   switch (ext) {
     case '.pdf': {
       try {
-        const { PDFParse } = await import('pdf-parse');
+        const { PDFParse } = await import('pdf-parse/node');
         const parser = new PDFParse({ data: buffer });
         
         let text = '';
