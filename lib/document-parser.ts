@@ -100,24 +100,12 @@ export async function parseDocument(
   switch (ext) {
     case '.pdf': {
       try {
-        const { PDFParse } = await import('pdf-parse/node');
-        const parser = new PDFParse({ data: buffer });
+        const pdf = (await import('pdf-parse')).default;
+        const data = await pdf(buffer);
         
-        let text = '';
-        let numpages: number | undefined;
-        let info: any = null;
-
-        try {
-          const textResult = await parser.getText();
-          text = textResult.text;
-          const infoResult = await parser.getInfo().catch(() => null);
-          if (infoResult) {
-            numpages = infoResult.total;
-            info = infoResult.info;
-          }
-        } finally {
-          await parser.destroy().catch(() => null);
-        }
+        const text = data.text || '';
+        const numpages = data.numpages;
+        const info = data.info;
 
         if (!text || text.trim().length === 0) {
           // Fallback to OCR for scanned PDFs
